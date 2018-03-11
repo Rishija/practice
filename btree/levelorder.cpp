@@ -1,32 +1,5 @@
 #include "btree.h"
 
-template<class T>
-void Btree<T>::print_levelOrder() {
-    
-    queue<Node*> myQueue;
-    myQueue.push(root);
-    print_levelOrder(myQueue);
-}
-
-template<class T>
-void Btree<T>::print_levelOrder(queue<Node*> inQueue) {
-    
-    if(!inQueue.size()) return;
-    
-    queue<Node*> outQueue;
-    while(inQueue.size() > 0){
-        Node* thisNode = inQueue.front();
-        cout << thisNode -> val << " ";
-        if(thisNode -> left != nullptr)
-            outQueue.push(thisNode -> left);
-        if(thisNode -> right != nullptr)
-            outQueue.push(thisNode -> right);
-        inQueue.pop();
-    }
-    cout << endl;
-    print_levelOrder(outQueue);
-}
-
 int main() {
     Btree<int>tree;
     tree.insert(87);
