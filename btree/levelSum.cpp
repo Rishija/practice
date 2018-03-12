@@ -2,6 +2,10 @@
 
 template<class T>
 void Btree<T>::level_sum() {
+    
+    if(root == nullptr)
+        return;
+    
     queue<Node*> myQueue;
     myQueue.push(root);
     level_sum(myQueue, 1);

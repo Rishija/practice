@@ -58,6 +58,9 @@ void Btree<T>::insert(T data, Node* &node) {
 template<class T>
 void Btree<T>::print_levelOrder() {
     
+    if(root == nullptr)
+        return;
+    
     queue<Node*> myQueue;
     myQueue.push(root);
     print_levelOrder(myQueue);

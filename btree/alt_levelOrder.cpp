@@ -5,6 +5,9 @@
 template<class T>
 void Btree<T>::alt_level_order() {
     
+    if(root == nullptr)
+        return;
+    
     deque<Node*>myQueue;
     myQueue.push_back(root);
     alt_level_order(myQueue, 1);
