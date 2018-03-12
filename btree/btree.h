@@ -26,6 +26,7 @@ public:
     T child_sum();
     void alt_level_order();
     void diameter();
+    bool isBST(T low, T high);
     
 private:
     void insert(T, Node* &);
@@ -36,6 +37,7 @@ private:
     T child_sum(Node* &);
     void alt_level_order(deque<Node*>, bool);
     pair<T,T> diameter(Node*);
+    bool isBST(Node* node, T low, T high);
 };
 
 template<class T>
