@@ -28,6 +28,19 @@ void Btree<T>::even_odd_levelSum(pair<T,T> &pair, queue<Node*> inQueue, bool lev
     even_odd_levelSum(pair, outQueue, !level);
 }
 
+
+// call it even_odd_levelSum(node, pair, 0);
+template<class T>
+void Btree<T>::even_odd_levelSum(Node* node, int[2] pair, int level){
+   
+    if(node == null)
+        return;
+    pair[level %2] = node -> val;
+    
+    even_odd_levelSum(node -> left, pair, level + 1);
+    even_odd_levelSum(node -> right, pair, level + 1);
+}
+
 int main() {
     Btree<int>tree;
     tree.insert(87);
