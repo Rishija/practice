@@ -71,7 +71,8 @@ void Btree<T>::print_levelOrder() {
 template<class T>
 void Btree<T>::print_levelOrder(queue<Node*> inQueue) {
     
-    if(!inQueue.size()) return;
+    if(!inQueue.size())
+        return;
     
     queue<Node*> outQueue;
     while(inQueue.size() > 0){
