@@ -4,6 +4,7 @@
 #include <iostream>
 #include <queue>
 #include <utility>
+#include <stack>
 using namespace std;
 
 template <class T>
@@ -27,6 +28,7 @@ public:
     void alt_level_order();
     void diameter();
     bool isBST(T low, T high);
+    void alt_level_order_stack();
     
 private:
     void insert(T, Node* &);

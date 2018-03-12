@@ -45,6 +45,44 @@ void Btree<T>::alt_level_order(deque<Node*> inQueue, bool level){
     alt_level_order(outQueue, !level);
 }
 
+template<class T>
+void Btree<T>::alt_level_order_stack() {
+    
+    stack<Node*>stack1, stack2;
+    if(root != nullptr)
+        stack1.push(root);
+    
+    bool flag = true;
+    
+    while(!stack1.empty()) {
+        while (!stack1.empty()) {
+            Node* thisNode = stack1.top();
+            stack1.pop();
+            cout << thisNode -> val << " ";
+            
+            if(flag) {
+                if(thisNode -> left != nullptr)
+                    stack2.push(thisNode -> left);
+                if(thisNode -> right != nullptr)
+                    stack2.push(thisNode -> right);
+            }
+            else {
+                if(thisNode -> right != nullptr)
+                    stack2.push(thisNode -> right);
+                if(thisNode -> left != nullptr)
+                    stack2.push(thisNode -> left);
+            }
+        }
+        cout << endl;
+        
+        stack1 = stack2;
+        while(!stack2.empty())
+            stack2.pop();
+        
+        flag = !flag;
+    }
+}
+
 int main() {
     Btree<int>tree;
     tree.insert(87);
@@ -71,5 +109,7 @@ int main() {
     tree.print_levelOrder();
     cout<<endl;
     tree.alt_level_order();
+    cout << endl;
+    tree.alt_level_order_stack();
     return 0;
 }
