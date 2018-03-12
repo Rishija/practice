@@ -34,6 +34,28 @@ pair<T,T> Btree<T>::diameter(Node* node) {
 	return thisAns;
 }
 
+template<class T>
+int Btree<T>::diameter_simple() {
+    int diam = 0;
+    diameter_simple(root, diam);
+    return diam;
+}
+
+template<class T>
+int Btree<T>::diameter_simple(Node* node, int &diam) {
+    
+    if(node == nullptr)
+        return 0;
+    
+    int left = diameter_simple(node -> left, diam),
+    right = diameter_simple(node -> right, diam);
+    
+    if(diam < 1 + left + right)
+        diam = 1 + left + right;
+    
+    return 1 + ( left > right ? left : right );
+}
+
 int main() {
     Btree<int>tree;
     tree.insert(87);
@@ -58,6 +80,8 @@ int main() {
     tree.insert(289);
     tree.insert(27);
     tree.print_levelOrder();
+    cout << endl;
     tree.diameter();
+    cout << endl << "With second method: " << tree.diameter_simple() << endl;
     return 0;
 }
