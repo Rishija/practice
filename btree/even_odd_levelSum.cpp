@@ -2,12 +2,22 @@
 
 template<class T>
 void Btree<T>::even_odd_levelSum() {
+    
     pair<T,T> pair= {0,0};
     queue<Node*>myQueue;
-    myQueue.push(root);
+    if(root != nullptr)
+        myQueue.push(root);
+    
     even_odd_levelSum(pair, myQueue, 1);
     cout << "Sum of nodes at odd level: " << pair.first << endl
     << "Sum of nodes at even level: " << pair.second <<endl;
+    
+    cout << endl;
+    // method 2
+    T sum[2] = {0};
+    even_odd_levelSum(root, sum, 1);
+    cout << "odd level sum: " << sum[1] <<endl
+    << "even level sum: " << sum[0] << endl;
 }
 
 template<class T>
@@ -29,13 +39,12 @@ void Btree<T>::even_odd_levelSum(pair<T,T> &pair, queue<Node*> inQueue, bool lev
 }
 
 
-// call it even_odd_levelSum(node, pair, 0);
 template<class T>
-void Btree<T>::even_odd_levelSum(Node* node, int[2] pair, int level){
-   
-    if(node == null)
+void Btree<T>::even_odd_levelSum(Node* node, T pair[], int level) {
+    
+    if(node == nullptr)
         return;
-    pair[level %2] = node -> val;
+    pair[level % 2] += node -> val;
     
     even_odd_levelSum(node -> left, pair, level + 1);
     even_odd_levelSum(node -> right, pair, level + 1);

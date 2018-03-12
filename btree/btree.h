@@ -31,6 +31,7 @@ private:
     void insert(T, Node* &);
     void print_levelOrder(queue<Node*>);
     void even_odd_levelSum(pair<T,T> &, queue<Node*>, bool);
+    void even_odd_levelSum(Node*, T[2], int);
     void level_sum(queue<Node*>, int);
     T child_sum(Node* &);
     void alt_level_order(deque<Node*>, bool);
