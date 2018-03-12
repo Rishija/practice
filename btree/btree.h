@@ -25,6 +25,7 @@ public:
     void level_sum();
     T child_sum();
     void alt_level_order();
+    void diameter();
     
 private:
     void insert(T, Node* &);
@@ -33,6 +34,7 @@ private:
     void level_sum(queue<Node*>, int);
     T child_sum(Node* &);
     void alt_level_order(deque<Node*>, bool);
+    pair<T,T> diameter(Node*);
 };
 
 template<class T>
