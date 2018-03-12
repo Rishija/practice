@@ -14,7 +14,7 @@ T Btree<T>::child_sum(Node* &node) {
     
     T value = node -> val;
     node -> val = child_sum(node->left) + child_sum(node->right);
-    return vale + node -> val;
+    return value + node -> val;
 }
 
 int main() {
