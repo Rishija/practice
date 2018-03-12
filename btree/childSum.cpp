@@ -12,15 +12,9 @@ T Btree<T>::child_sum(Node* &node) {
     if(node == nullptr)
         return 0;
     
-    T sum = 0;
-    if(node -> left != nullptr) {
-        sum += node -> left -> val + child_sum(node -> left);
-    }
-    if(node -> right != nullptr) {
-        sum += node -> right -> val + child_sum(node -> right);
-    }
-    node -> val = sum;
-    return node -> val;
+    T value = node -> val;
+    node -> val = child_sum(node->left) + child_sum(node->right);
+    return vale + node -> val;
 }
 
 int main() {
