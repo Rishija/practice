@@ -32,6 +32,8 @@ public:
     int diameter_simple();
     Node* lca(T val1, T val2);
     bool validate_sum(T k);
+    Node* tree_to_dll();
+    void tree_to_dll(Node*, Node* &, Node* &);
     
 private:
     void insert(T, Node* &);
