@@ -7,11 +7,11 @@ void Btree<T>::diameter() {
 }
 
 template<class T>
-pair<T,T> Btree<T>::diameter(Node* node) {
+pair<int,int> Btree<T>::diameter(Node* node) {
 	if(node == nullptr)
 		return make_pair(0,0);
 
-	pair<T,T> lAns = diameter(node -> left),
+	pair<int,int> lAns = diameter(node -> left),
 	rAns = diameter(node -> right),
 	thisAns;
 

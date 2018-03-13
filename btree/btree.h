@@ -30,6 +30,8 @@ public:
     bool isBST(T low, T high);
     void alt_level_order_stack();
     int diameter_simple();
+    Node* lca(T val1, T val2);
+    bool validate_sum(T k);
     
 private:
     void insert(T, Node* &);
@@ -39,9 +41,11 @@ private:
     void level_sum(queue<Node*>, int);
     T child_sum(Node* &);
     void alt_level_order(deque<Node*>, bool);
-    pair<T,T> diameter(Node*);
+    pair<int,int> diameter(Node*);
     bool isBST(Node* node, T low, T high);
     int diameter_simple(Node* node, int &diameter);
+    Node* lca(Node* node, T val1, T val2);
+    bool validate_sum(Node*, const T, T);
 };
 
 template<class T>
