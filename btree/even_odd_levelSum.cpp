@@ -1,5 +1,9 @@
 #include "btree.h"
 
+/**
+ * Time complexity : O(n)
+ * Space complexity : O(n)
+ */
 template<class T>
 void Btree<T>::even_odd_levelSum() {
     
@@ -13,6 +17,7 @@ void Btree<T>::even_odd_levelSum() {
     << "Sum of nodes at even level: " << pair.second <<endl;
     
     cout << endl;
+    
     // method 2
     T sum[2] = {0};
     even_odd_levelSum(root, sum, 1);
@@ -38,7 +43,10 @@ void Btree<T>::even_odd_levelSum(pair<T,T> &pair, queue<Node*> inQueue, bool lev
     even_odd_levelSum(pair, outQueue, !level);
 }
 
-
+/**
+ * Time complexity : O(n)
+ * Space complexity : O(n)
+ */
 template<class T>
 void Btree<T>::even_odd_levelSum(Node* node, T pair[], int level) {
     

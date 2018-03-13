@@ -13,6 +13,10 @@ void Btree<T>::alt_level_order() {
     alt_level_order(myQueue, 1);
 }
 
+/**
+ * Time complexity : O(n)
+ * Space complexity : O(n)      ( O(n) auxilliary space + O(height) in stack area )
+ */
 template<class T>
 void Btree<T>::alt_level_order(deque<Node*> inQueue, bool level){
     
@@ -45,6 +49,10 @@ void Btree<T>::alt_level_order(deque<Node*> inQueue, bool level){
     alt_level_order(outQueue, !level);
 }
 
+/**
+ * Time complexity : O(n)
+ * Space complexity : O(n)
+ */
 template<class T>
 void Btree<T>::alt_level_order_stack() {
     

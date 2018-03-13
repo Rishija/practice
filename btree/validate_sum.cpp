@@ -1,5 +1,9 @@
 #include "btree.h"
 
+/**
+ * Time complexity : O(n)
+ * Space complexity : O(height)
+ */
 template<class T>
 bool Btree<T>::validate_sum(T k) {
     return validate_sum(root, k, 0);

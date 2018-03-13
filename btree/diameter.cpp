@@ -1,5 +1,9 @@
 #include "btree.h"
 
+/**
+ * Time complexity : O(n)
+ * Space complexity : O(height)
+ */
 template<class T>
 void Btree<T>::diameter() {
 	cout << "Diameter: " << diameter(root).first << endl
@@ -34,6 +38,10 @@ pair<int,int> Btree<T>::diameter(Node* node) {
 	return thisAns;
 }
 
+/**
+ * Time complexity : O(n)
+ * Space complexity : O(n)
+ */
 template<class T>
 int Btree<T>::diameter_simple() {
     int diam = 0;

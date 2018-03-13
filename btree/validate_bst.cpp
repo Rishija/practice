@@ -1,5 +1,9 @@
 #include "btree.h"
 
+/**
+ * Time complexity : O(n)
+ * Space complexity : O(height)
+ */
 template <class T>
 bool Btree<T>::isBST(T low, T high) {
     return isBST(root, low, high);
@@ -19,6 +23,10 @@ bool Btree<T>::isBST(Node* node, T low, T high) {
      */
     return isBST(node -> left, low, node -> val - 1) && isBST(node -> right, node -> val, high);
 }
+
+/* Method 2
+ Check if inorder traversal is a sorted array
+ */
 
 int main() {
     Btree<int>tree;

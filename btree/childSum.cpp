@@ -1,6 +1,10 @@
 // Replace every node value with the sum of all its children nodes (all nodes below this)
-
 #include "btree.h"
+
+/**
+ * Time complexity : O(n)
+ * Space complexity : O(height)
+ */
 template<class T>
 T Btree<T>::child_sum() {
     return child_sum(root);

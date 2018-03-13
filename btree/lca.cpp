@@ -1,5 +1,9 @@
 #include "btree.h"
 
+/**
+ * Time complexity : O(n)
+ * Space complexity : O(height)
+ */
 template<class T>
 typename Btree<T>::Node* Btree<T>::lca(T val1, T val2) {
     return lca(root, val1, val2);
