@@ -21,11 +21,11 @@ typename Btree<T>::Node* Btree<T>::lca(Node* node, T val1, T val2) {
         return node;
     
     Node *l = lca(node -> left, val1, val2), *r = lca(node -> right, val1, val2);
-    
-    if(l != nullptr)
-        return (r != nullptr) ? node : l;
-    
-    return (r != nullptr) ? r : nullptr;
+
+    if((l == nullptr) || (r == nullptr))
+        return (l == nullptr) : r : l
+ 
+    return node;
 }
 
 int main() {
