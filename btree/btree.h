@@ -5,6 +5,7 @@
 #include <queue>
 #include <utility>
 #include <stack>
+#include <map>
 using namespace std;
 
 template <class T>
@@ -34,6 +35,7 @@ public:
     bool validate_sum(T k);
     Node* tree_to_dll();
     void tree_to_dll(Node*, Node* &, Node* &);
+    void print_vertical();
     
 private:
     void insert(T, Node* &);
@@ -48,6 +50,7 @@ private:
     int diameter_simple(Node* node, int &diameter);
     Node* lca(Node* node, T val1, T val2);
     bool validate_sum(Node*, const T, T);
+    void print_vertical(Node*, int, map<int, vector<Node*> > &);
 };
 
 template<class T>
