@@ -6,8 +6,27 @@
  */
 template<class T>
 void Linked_list<T>::reverse_recursive() {
-    head = reverse_recursive(head, nullptr);
+    
+    head = reverse_recursive(head);
+    
+    /* Method 2
+     head = reverse_recursive(head, nullptr);
+     */
 }
+
+template<class T>
+typename Linked_list<T>::Node* Linked_list<T>::reverse_recursive(Node* node) {
+    
+    if(node -> next == nullptr) {
+        return node;
+    }
+    Node* temp = reverse_recursive(node -> next);
+    node -> next -> next = node;
+    node -> next  = nullptr;
+    return temp;
+}
+
+/** Method 2 **/
 
 // Do not pass reference here
 template<class T>

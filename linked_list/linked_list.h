@@ -27,6 +27,7 @@ private:
     
     void insert(Node* &, T);
     Node* reverse_recursive(Node*, Node*);
+    Node* reverse_recursive(Node*);
     void delete_value(Node*, T, int &);
 };
 
