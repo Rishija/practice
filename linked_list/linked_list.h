@@ -25,6 +25,7 @@ public:
     bool isPalimdrome () const;
     Node* merge(Linked_list<T>, Linked_list<T>);
     void Delete(Node*);
+    Node* add(Linked_list<T>, Linked_list<T>);
     
 private:
     Node* head;
