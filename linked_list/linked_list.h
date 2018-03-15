@@ -2,6 +2,7 @@
 #define linked_list_h
 
 #include <iostream>
+#include <stack>
 using namespace std;
 
 template<class T>
@@ -17,15 +18,19 @@ public:
     
     Linked_list() : head(nullptr) {}
     void insert(T);
-    void print();
+    void print() const;
     void reverse_iterative();
     void reverse_recursive();
     int delete_value(T);
+    bool isPalimdrome () const;
+    Node* merge(Linked_list<T>, Linked_list<T>);
+    void Delete(Node*);
     
 private:
     Node* head;
     
     void insert(Node* &, T);
+    void insert(Node*, Node*);
     Node* reverse_recursive(Node*, Node*);
     Node* reverse_recursive(Node*);
     void delete_value(Node*, T, int &);
@@ -55,11 +60,22 @@ void Linked_list<T>::insert(Node* &node, T value) {
 
 
 /**
+ * Time complexity : O(1)
+ * Space complexity : O(1)
+ */
+template<class T>
+void Linked_list<T>::insert(Node* source, Node* destination) {
+    
+    source -> next = destination;
+}
+
+
+/**
  * Time complexity : O(n)
  * Space complexity : O(1)
  */
 template<class T>
-void Linked_list<T>::print() {
+void Linked_list<T>::print() const {
     
     Node* current = head;
     while(current != nullptr) {
