@@ -6,21 +6,21 @@
  */
 template<class T>
 void Linked_list<T>::reverse_recursive() {
-    reverse_recursive(head);
+    head = reverse_recursive(head, nullptr);
 }
 
 // Do not pass reference here
 template<class T>
-void Linked_list<T>::reverse_recursive(Node* node) {
+typename Linked_list<T>::Node* Linked_list<T>::reverse_recursive(Node* node, Node* parent) {
     
     if(node -> next == nullptr) {
-        head = node;
-        return;
+        node -> next = parent;
+        return node;
     }
     
-    reverse_recursive(node -> next);
-    node -> next -> next = node;
-    node -> next  = nullptr;
+    Node* nextNode = node -> next;
+    node -> next = parent;
+    return reverse_recursive(nextNode, node);
 }
 
 int main() {

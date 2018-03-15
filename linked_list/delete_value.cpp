@@ -8,15 +8,12 @@ template<class T>
 int Linked_list<T>::delete_value(T k) {
     
     int count = 0;
-    Node* temp;
+    Node* dummyHead;
+    dummyHead -> next = head;
     
-    while(head != nullptr && head -> val == k) {
-        temp = head;
-        delete head;
-        head = temp -> next;
-        ++ count;
-    }
-    delete_value(head, k, count);
+    delete_value(dummyHead, k, count);
+    
+    head = dummyHead -> next;
     return count;
 }
 

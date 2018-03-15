@@ -21,13 +21,13 @@ public:
     void reverse_iterative();
     void reverse_recursive();
     int delete_value(T);
-    void delete_value(Node*, T, int &);
     
 private:
     Node* head;
     
     void insert(Node* &, T);
-    void reverse_recursive(Node*);
+    Node* reverse_recursive(Node*, Node*);
+    void delete_value(Node*, T, int &);
 };
 
 
