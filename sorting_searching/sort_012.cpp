@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstdlib>
+#include <vector>
+#include <functional>
 #define N 10
 using namespace std;
 
@@ -73,6 +75,14 @@ void print(int *arr) {
     cout << endl;
 }
 
+void sort_print(vector<int*> &v, function<void(int*)>sortFn) {
+    
+    for(int i = 0; i < v.size(); ++i) {
+        sortFn(v[i]);
+        print(v[i]);
+    }
+}
+
 int main() {
     
     int arr1[N], arr2[N], arr3[N], arr4[N], arr5[N], arr6[N], arr7[N];
@@ -86,52 +96,18 @@ int main() {
         arr7[i] = rand() % 3;           // mix
     }
     
-    print(arr1);
-    print(arr2);
-    print(arr3);
-    print(arr4);
-    print(arr5);
-    print(arr6);
-    print(arr7);
-    cout <<endl;
+    vector<int*> v;
+    v.push_back(arr1);
+    v.push_back(arr2);
+    v.push_back(arr3);
+    v.push_back(arr4);
+    v.push_back(arr5);
+    v.push_back(arr6);
+    v.push_back(arr7);
     
-    /*
-     method1(arr1);
-     method1(arr2);
-     method1(arr3);
-     method1(arr4);
-     method1(arr5);
-     method1(arr6);
-     method1(arr7);
-     */
-    
-    /*
-     method2(arr1);
-     method2(arr2);
-     method2(arr3);
-     method2(arr4);
-     method2(arr5);
-     method2(arr6);
-     method2(arr7);
-     */
-    
-    /*
-     method3(arr1);
-     method3(arr2);
-     method3(arr3);
-     method3(arr4);
-     method3(arr5);
-     method3(arr6);
-     method3(arr7);
-     */
-    
-    print(arr1);
-    print(arr2);
-    print(arr3);
-    print(arr4);
-    print(arr5);
-    print(arr6);
-    print(arr7);
+    // sort_print(v, method1);
+    // sort_print(v, method2);
+    sort_print(v, method3);
     
     return 0;
 }

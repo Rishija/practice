@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstdlib>
+#include <vector>
+#include <functional>
 #define N 10
 using namespace std;
 
@@ -53,6 +55,14 @@ void print(int *arr) {
     cout << endl;
 }
 
+void sort_print(vector<int*> &v, function<void(int*)>sortFn) {
+    
+    for(int i = 0; i < v.size(); ++i) {
+        sortFn(v[i]);
+        print(v[i]);
+    }
+}
+
 int main() {
     
     int arr1[N], arr2[N], arr3[N];
@@ -62,27 +72,14 @@ int main() {
         arr3[i] = rand() % 2;
     }
     
-    /*
-     method1(arr1);
-     method1(arr2);
-     method1(arr3);
-     */
+    vector<int*> v;
+    v.push_back(arr1);
+    v.push_back(arr2);
+    v.push_back(arr3);
     
-    /*
-     method2(arr1);
-     method2(arr2);
-     method2(arr3);
-     */
-    
-    /*
-     method3(arr1);
-     method3(arr2);
-     method3(arr3);
-    */
-    
-    print(arr1);
-    print(arr2);
-    print(arr3);
+    // sort_print(v, method1);
+    // sort_print(v, method2);
+    sort_print(v, method3);
     
     return 0;
 }
