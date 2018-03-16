@@ -31,18 +31,25 @@ void method2(int *arr) {
         arr[i] = 1;
 }
 
+void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
 void method3(int *arr) {
     
-    int low = -1, high = N;
+    int low = 0, high = N;
     
     for(int i = 0; i < high; ++i) {
-        if(!arr[i])
-            arr[++low] = 0;
+        if(arr[i] == 0 && i != low) {
+            swap(arr[i], arr[low]);
+            ++ low;
+        }
         else {
             --high;
-            arr[i] = arr[high];
-            arr[high] = 1;
-            if(arr[i])
+            swap(arr[i], arr[high]);
+            if(arr[i] == 1)
                 --i;
         }
     }

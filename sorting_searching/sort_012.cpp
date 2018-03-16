@@ -48,6 +48,12 @@ void method2(int *arr) {
         arr[i] = 2;
 }
 
+void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+
 void method3(int *arr) {
     
     int low = -1, high = N;
@@ -55,13 +61,11 @@ void method3(int *arr) {
     for(int i = 0; i < high; ++i) {
         if(!arr[i]) {
             ++ low;
-            arr[i] = arr[low];
-            arr[low] = 0;
+            swap(arr[i], arr[low]);
         }
         else if(arr[i] == 2){
             --high;
-            arr[i] = arr[high];
-            arr[high] = 2;
+            swap(arr[i], arr[high]);
         }
         if(arr[i] != 1 && i != low)
             --i;
