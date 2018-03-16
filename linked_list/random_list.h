@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <iomanip>
+#include <map>
 using namespace std;
 
 
@@ -27,6 +28,7 @@ public:
 private:
     Node* head;
     size_t size;
+    map<Node*,size_t> indexx;
     
     Node* insert_without_random(Node* &, T);
     void insert(Node* &, T value);
@@ -61,6 +63,10 @@ void List<T>::insert(Node* &node, T value) {
             ++i;
         }
         node -> random = current;
+        
+        /* Uncomment to use method 2
+         indexx[node] = size;
+         */
     }
 }
 

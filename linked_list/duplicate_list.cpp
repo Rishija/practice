@@ -1,5 +1,7 @@
 #include "random_list.h"
 
+/* Method 2 : Use map to store indices of nodes of original list */
+
 /**
  * Time complexity : O(n)
  * Space complexity : O(1)
@@ -23,6 +25,7 @@ typename List<T>::Node* List<T>::insert_without_random(Node* &node, T value) {
 
 /**
  * Time complexity : O(n)
+  * Time complexity : O(Log(n))        with method 2
  * Space complexity : O(1)
  */
 template<class T>
@@ -30,6 +33,10 @@ size_t List<T>::getIndex(Node* node) const {
     
     if(node == nullptr)
         return 0;
+    
+    /* Uncomment to use method 2
+     return indexx.find(node) -> second + 1;
+     */
     
     size_t index = 1;
     Node* current = head;
@@ -42,6 +49,7 @@ size_t List<T>::getIndex(Node* node) const {
 
 /**
  * Time complexity : O(n^2)
+ * Time complexity : O(n Log(n))        with method 2
  * Space complexity : O(n)
  */
 template<class T>
