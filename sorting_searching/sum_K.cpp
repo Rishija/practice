@@ -7,32 +7,38 @@
 #define N 10
 using namespace std;
 
-/* O(log(N)) */
-int bsearch(int elem, int *arr, int loww, int n) {
-    
-    int low = loww, high = n - 1, mid;
-    while(low <= high) {
-        mid = (low + high)/2;
-        if(arr[mid] == elem)
-            return mid;
-        if(arr[mid] < elem)
-            low = mid + 1;
-        else
-            high = mid - 1;
-    }
-    return -1;
-}
-
-/* O(N log(N)) */
+/*
+ O(N)
+ O(N log(N)) : Method 2
+ */
 vector<pair<int,int> > sum_K(int *arr, int n, int K) {
     
-    int pairIndex;
+    int low = 0, high = n - 1, temp;
     vector<pair<int,int> > vec;
-    for(int i = 0; i < n; ++i) {
-        pairIndex = bsearch(K - arr[i], arr, i+1, n);
-        if(pairIndex > -1)
-            vec.push_back({arr[i], arr[pairIndex]});
+    
+    while(low < high) {
+        temp = arr[low] + arr[high];
+        if(temp == K) {
+            vec.push_back({arr[low], arr[high]});
+            /* Conditions : Elements should be unique */
+            ++ low;
+            -- high;
+        }
+        else if(temp < K)
+            ++ low;
+        else
+            -- high;
     }
+    
+    /* Method 2
+     
+     int pairIndex;
+     for(int i = 0; i < n; ++i) {
+     pairIndex = bsearch(K - arr[i], arr, i+1, n);
+     if(pairIndex > -1)
+     vec.push_back({arr[i], arr[pairIndex]});
+     }
+     */
     return vec;
 }
 

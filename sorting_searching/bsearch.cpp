@@ -7,7 +7,7 @@ int bsearch(int elem, int *arr, int n) {
     int low = 0, high = n - 1, mid;
     while(low <= high) {
         
-        mid = (low + high)/2;
+        mid = low + (high - low) / 2;
         
         if(arr[mid] == elem)
             return mid;

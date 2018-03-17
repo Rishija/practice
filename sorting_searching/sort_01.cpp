@@ -42,8 +42,9 @@ void method3(int *arr) {
     int low = 0, high = N;
     
     for(int i = 0; i < high; ++i) {
-        if(arr[i] == 0 && i != low) {
-            swap(arr[i], arr[low]);
+        if(arr[i] == 0) {
+            if(i != low)
+                swap(arr[i], arr[low]);
             ++ low;
         }
         else {

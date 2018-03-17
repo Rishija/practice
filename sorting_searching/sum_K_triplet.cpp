@@ -7,37 +7,42 @@
 #define N 10
 using namespace std;
 
-/* O(log(N)) */
-int bsearch(int elem, int *arr, int loww, int n) {
+/* O(N)
+ O(N log(N)) : Method 2
+ */
+vector<tuple<int,int> > sum_K(int *arr, int loww, int n, int K) {
     
-    int low = loww, high = n - 1, mid;
-    while(low <= high) {
-        mid = (low + high)/2;
-        if(arr[mid] == elem)
-            return mid;
-        if(arr[mid] < elem)
-            low = mid + 1;
-        else
-            high = mid - 1;
-    }
-    return -1;
-}
-
-/* O(N log(N)) */
-vector<tuple<int,int> > sum_K(int *arr, int low, int n, int K) {
-    
-    int pairIndex;
+    int low = loww, high = n - 1, temp;
     vector<tuple<int,int> > vec;
-    for(int i = low; i < n; ++i) {
-        pairIndex = bsearch(K - arr[i], arr, i+1, n);
-        if(pairIndex > -1) {
-            vec.push_back({arr[i], arr[pairIndex]});
+    
+    while(low < high) {
+        temp = arr[low] + arr[high];
+        if(temp == K) {
+            vec.push_back({arr[low], arr[high]});
+            /* Conditions : Elements should be unique */
+            ++ low;
+            -- high;
         }
+        else if(temp < K)
+            ++ low;
+        else
+            -- high;
     }
+    
+    /* Method 2
+     
+     int pairIndex;
+     for(int i = low; i < n; ++i) {
+     pairIndex = bsearch(K - arr[i], arr, i+1, n);
+     if(pairIndex > -1) {
+     vec.push_back({arr[i], arr[pairIndex]});
+     }
+     }
+     */
     return vec;
 }
 
-/* O(N^2 log(N)) */
+/* O(N^2) */
 vector<tuple<int,int,int> > sum_K_triplet(int *arr, int n, int K) {
     
     int size;
@@ -77,4 +82,3 @@ int main() {
     print_vector(ans);
     return 0;
 }
-

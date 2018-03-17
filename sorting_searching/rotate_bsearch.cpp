@@ -10,7 +10,7 @@ int bsearch(int elem, int *arr, int start, int n) {
     int low = start, high = start + n - 1, mid, mid1;
     while(low <= high) {
         
-        mid = (low + high)/2;
+        mid = low + (high - low) / 2;
         mid1 = mid % n;
         
         if(arr[mid1] == elem)
@@ -35,11 +35,11 @@ int changeAt(int *arr, int n) {
         
         mid = (low + high) / 2;
         
-        if(arr[mid] > arr[mid + 1])     // change from index mid
+        if(arr[mid] > arr[(mid + 1 + n) % n])     // change from index mid
             return mid;
         
-        if(arr[mid - 1] > arr[mid])     // change at index mid-1
-            return mid - 1;
+        if(arr[(mid - 1 + n) % n] > arr[mid])     // change at index mid-1
+            return (mid - 1 + n) % n;
         
         if(arr[low + 1] < arr[mid])     // error on right side
             low = mid + 1;
@@ -66,20 +66,27 @@ void print(int *arr, int n) {
     
     for(int i = 0; i < n; ++i)
         cout << arr[i] << "\t->\t" << rotated_bsearch(arr[i], arr, n) << endl;
+    
+    // element absent
+    cout << 0 << "\t->\t" << rotated_bsearch(0, arr, n) << endl;
+    
     cout << endl;
 }
+
 
 int main() {
     
     int arr1[10] = {80,90,100,10,20,30,40,50,60,70},
     arr2[2] = {20,10},
     arr3[3] = {50},
-    arr4[4] = {10,20,30,40};
+    arr4[4] = {10,20,30,40},
+    arr5[2] = {1,3};
     
     print(arr1, 10);
     print(arr2, 2);
     print(arr3, 1);
     print(arr4, 4);
+    print(arr5, 2);
     
     return 0;
 }
