@@ -1,3 +1,6 @@
+/*
+  Given a sorted array and a K. Find all pairs in array with sum equals K
+ */
 #include <iostream>
 #include <vector>
 #include <utility>

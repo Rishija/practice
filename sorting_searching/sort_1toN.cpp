@@ -1,3 +1,6 @@
+/*
+ An array of size N. Has unique element from 1 to N sort it.
+ */
 #include <iostream>
 using namespace std;
 #define N 10
