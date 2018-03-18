@@ -1,3 +1,6 @@
+/*
+ Given two strings s and t, write a function to determine if t is an anagram of s.
+ */
 #include <iostream>
 #include <string>
 #include <map>
@@ -20,6 +23,8 @@ bool isPermutation(string s, string t) {
     }
     return true;
 }
+
+/* Method 2 : sort */
 
 int main() {
     

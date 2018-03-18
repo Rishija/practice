@@ -1,3 +1,6 @@
+/*
+ Sort array of 0s and 1s
+ */
 #include <iostream>
 #include <cstdlib>
 #include <vector>

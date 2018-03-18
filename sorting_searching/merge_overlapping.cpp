@@ -1,3 +1,6 @@
+/*
+ Given a collection of intervals, merge all overlapping intervals
+ */
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -24,18 +27,35 @@ vector<Interval> merge_overlapping(vector<Interval> vec) {
         return false;
     });
     
-    while(i < n) {
-        int start = vec[i].start, max = vec[i].end;
-        while(i < n && vec[i].start <= max) {
-            max = vec[i].end > max ? vec[i].end : max;
-            ++i;
+    Interval previous = vec[0];
+    
+    for(int i = 1; i< vec.size(); i++) {
+        Interval current = vec[i];
+        if(previous.end >= current.start)
+            previous.end = max(previous.end, current.end);
+        else {
+            ans.push_back(previous);
+            previous = current;
         }
-        Interval x(start, max);
-        ans.push_back(x);
     }
+    
+    ans.push_back(previous);
     return ans;
+    
+    /* Method 2
+     
+     while(i < n) {
+     int start = vec[i].start, max = vec[i].end;
+     while(i < n && vec[i].start <= max) {
+     max = vec[i].end > max ? vec[i].end : max;
+     ++i;
+     }
+     Interval x(start, max);
+     ans.push_back(x);
+     }
+     return ans;
+     */
 }
-
 
 void merge_print(const vector<int> &a, const vector<int> &b) {
     

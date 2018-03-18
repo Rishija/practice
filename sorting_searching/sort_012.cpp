@@ -1,3 +1,6 @@
+/*
+ Dutch flag problem : Sort array of 0s, 1s and 2s
+ */
 #include <iostream>
 #include <cstdlib>
 #include <vector>
