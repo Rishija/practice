@@ -32,7 +32,7 @@ bool can_attend(vector<Interval> vec) {
     int end = vec[0].end;
     for(int i = 1; i < n; ++i) {
         
-        if(vec[i].end <= end)
+        if(vec[i].start < end)
             return false;
         
         end = vec[i].end;
