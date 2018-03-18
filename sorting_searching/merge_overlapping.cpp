@@ -72,6 +72,6 @@ int main() {
     
     start = {10,2}; end = {12,11};
     merge_print(start, end);
-    
+   
     return 0;
 }
