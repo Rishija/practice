@@ -8,8 +8,8 @@
  */
 
 /*
- Time : O( Log4/3 (n*m) * Log2(max(n,m)) )
- Space : O(n)
+ Time : O( Log4/3 (n*m)) )
+ Space : O( log2 (max(n,m) ) )
  */
 #include <iostream>
 #include <vector>
@@ -17,28 +17,11 @@
 #define p(x) cout<<(#x)<<" -> "<<search(x, v, 0, 3, 0, 4)<<endl;
 using namespace std;
 
-int bsearch(int elem, vector<int> arr, int loww, int highh) {
-    
-    int low = loww, high = highh, mid;
-    while(low <= high) {
-        
-        mid = low + (high - low) / 2;
-        
-        if(arr[mid] == elem)
-            return mid;
-        if(arr[mid] < elem)
-            low = mid + 1;
-        else
-            high = mid - 1;
-    }
-    return -1;
-}
-
 
 pair<int,int> search(int elem, vector<vector<int> > &vec, int rowStart, int rowEnd, int colStart, int colEnd) {
     
     pair<int,int> null = {-1,-1};
-    if(rowStart > rowEnd || colStart > colEnd  || rowStart < 0 || colStart < 0)
+    if(rowStart > rowEnd || colStart > colEnd)
         return {-1,-1};
     
     if(rowStart == rowEnd && colStart == colEnd)
@@ -52,40 +35,24 @@ pair<int,int> search(int elem, vector<vector<int> > &vec, int rowStart, int rowE
     
     pair<int, int> temp;
     
-    if(vec[rMid][cMid] > elem) {
-        // 1st Quadrant
+    // 1st Quadrant
+    if(vec[rMid][cMid] > elem)
         temp = search(elem, vec, rowStart, rMid, colStart, cMid);
-    }
     
-    else {
-        // current row
-        int tempp = bsearch(elem, vec[rMid], cMid + 1, colEnd);
-        if(tempp != -1)
-            return {rMid, tempp};
-        
-        // current column
-        vector<int> colVector;
-        for(int i = rMid + 1; i <= rowEnd; ++i)
-            colVector.push_back(vec[i][cMid]);
-        
-        tempp = bsearch(elem, colVector, 0, rowEnd - rMid - 1);
-        if(tempp != -1)
-            return {tempp + rMid + 1, cMid};
-        
-        // 4th Quadrant
+    // 4rth Quadrant
+    else
         temp = search(elem, vec, rMid + 1, rowEnd, cMid + 1, colEnd);
-    }
     
     if(temp != null)
         return temp;
     
     // 2nd Quadrant
-    temp = search(elem, vec, rowStart, rMid - 1, cMid + 1, colEnd);
+    temp = search(elem, vec, rowStart, rMid, cMid + 1, colEnd);
     if(temp != null)
         return temp;
     
     // 3rd Quadrant
-    return search(elem, vec, rMid + 1, rowEnd, colStart, cMid - 1);
+    return search(elem, vec, rMid + 1, rowEnd, colStart, cMid);
 }
 
 
@@ -99,17 +66,17 @@ ostream& operator << (ostream &out, const pair<int,int> p) {
 int main() {
     
     vector<vector<int> > v = {
-        {1,25,27,28,29},
-        {4,26,31,310,400},
-        {5,30,90,900, 901},
-        {100,310,910,911,912} };
+        {1,    25,     27,    28,    29},
+        {4,    26,     31,    312,   400},
+        {5,    30,     90,    900,   901},
+        {100,  310,    910,   911,   912} };
     
     // not present
     p(0); p(2); p(3); p(1000); p(500); p(410);
     
     // present
     p(1); p(25); p(27); p(28); p(29);
-    p(4); p(26); p(31); p(310); p(400);
+    p(4); p(26); p(31); p(312); p(400);
     p(5); p(30); p(90); p(900); p(901);
     p(100); p(310); p(910); p(911); p(912);
     
