@@ -96,7 +96,6 @@ int main() {
     tree.insert(5);
     
     for(int i = 0; i < 13; ++i) {
-        
         temp = tree.kSmallest(i);
         temp ? cout << i << " -> " << temp : cout << "Invalid";
         cout << endl;

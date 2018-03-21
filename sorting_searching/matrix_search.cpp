@@ -17,7 +17,6 @@
 #define p(x) cout<<(#x)<<" -> "<<search(x, v, 0, 3, 0, 4)<<endl;
 using namespace std;
 
-
 pair<int,int> search(int elem, vector<vector<int> > &vec, int rowStart, int rowEnd, int colStart, int colEnd) {
     
     pair<int,int> null = {-1,-1};

@@ -12,7 +12,7 @@ void swap(int &a, int &b) {
     b = temp;
 }
 
-/* Brute Force
+/* Method 2 : Brute Force
  
  Complexity : O(n^2)
  
