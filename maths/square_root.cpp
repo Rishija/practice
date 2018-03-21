@@ -16,10 +16,9 @@ int sqrt(int n) {
     while(low <= high) {
         
         mid = low + (high - low) / 2;
-        temp = mid * mid;
-        if(temp == n)
+        if(mid * mid == n)
             return mid;
-        if(temp < n)
+        if(mid < (n / mid))
             low = mid + 1;
         else
             high = mid - 1;

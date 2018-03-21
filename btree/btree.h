@@ -36,6 +36,7 @@ public:
     Node* tree_to_dll();
     void tree_to_dll(Node*, Node* &, Node* &);
     void print_vertical();
+    T kSmallest(size_t k);
     
 private:
     void insert(T, Node* &);
@@ -51,6 +52,7 @@ private:
     Node* lca(Node* node, T val1, T val2);
     bool validate_sum(Node*, const T, T);
     void print_vertical(Node*, int, map<int, vector<Node*> > &);
+    Node* kSmallest(Node*, size_t &, size_t, bool);
 };
 
 template<class T>

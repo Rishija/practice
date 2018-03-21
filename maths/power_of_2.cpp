@@ -60,7 +60,6 @@ int main() {
     
     string a;
     
-    
     // no
     a = "1";
     cout << a << ": " << power(a) << endl;
@@ -79,7 +78,6 @@ int main() {
     
     a = "252";
     cout << a << ": " << power(a) << endl;
-    
     
     a = "32762";
     cout << a << ": " << power(a) << endl;

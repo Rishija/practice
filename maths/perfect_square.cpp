@@ -27,6 +27,7 @@ bool isPerfectSqaure(int n) {
         else
             high = mid - 1;
     }
+    
     return false;
 }
 
