@@ -10,6 +10,9 @@ using namespace std;
 
 bool isPerfectSqaure(int n) {
     
+    if(n <= 0)
+        return false;
+    
     if(n == 1)
         return true;
     
@@ -17,10 +20,9 @@ bool isPerfectSqaure(int n) {
     while(low <= high) {
         
         mid = low + (high - low) / 2;
-        temp = mid * mid;
-        if(temp == n)
+        if(mid * mid == n)
             return true;
-        if(temp < n)
+        if(mid < (n / mid))
             low = mid + 1;
         else
             high = mid - 1;
