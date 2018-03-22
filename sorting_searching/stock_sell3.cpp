@@ -28,14 +28,6 @@ int max1(vector<int>& prices, int start, int end) {
     return profit;
 }
 
-class collection {
-public:
-    int min;
-    int maxx;
-    int profit;
-    collection() : min(0), maxx(0), profit(0) {}
-};
-
 int maxProfit(vector<int> prices) {
     
     int n = prices.size();
@@ -46,26 +38,25 @@ int maxProfit(vector<int> prices) {
     if(n == 2)
         return prices[1] > prices[0] ? prices[1] - prices[0] : 0;
     
-    vector<collection>leftProfit(n), rightProfit(n);
-    leftProfit[0].min = prices[0];
-    rightProfit[n-1].maxx = prices[n-1];
+    int minn, maxx;
+    minn = prices[0];
+    maxx = prices[n-1];
+    vector<int>leftProfit(n,0), rightProfit(n,0);
     
     for(int i = 1; i < n; ++i) {
-        leftProfit[i].min = min(leftProfit[i-1].min, prices[i]);
-        leftProfit[i].profit = max(leftProfit[i-1].profit, prices[i] - leftProfit[i].min);
+        
+        minn = min(prices[i],minn);
+        maxx = max(prices[n - i - 1], maxx);
+        leftProfit[i] = max(leftProfit[i-1], prices[i] - minn);
+        rightProfit[n - i - 1] = max(rightProfit[n - i], maxx - prices[n - i - 1]);
     }
     
-    for(int i = n - 2; i >= 0 ; --i) {
-        rightProfit[i].maxx = max(rightProfit[i+1].maxx, prices[i]);
-        rightProfit[i].profit = max(rightProfit[i+1].profit, rightProfit[i].maxx - prices[i]);
-    }
-    
-    int maxx = max1(prices, 0, n);
+    int maxProfit = max1(prices, 0, n);
     
     for(int i = 0; i < n - 1; ++i)
-        maxx = max(maxx, leftProfit[i].profit + rightProfit[i+1].profit);
+        maxProfit = max(maxProfit, leftProfit[i] + rightProfit[i+1]);
     
-    return maxx;
+    return maxProfit;
 }
 
 int main() {
