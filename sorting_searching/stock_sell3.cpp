@@ -51,7 +51,8 @@ int maxProfit(vector<int> prices) {
         rightProfit[n - i - 1] = max(rightProfit[n - i], maxx - prices[n - i - 1]);
     }
     
-    int maxProfit = max1(prices, 0, n);
+    int maxProfit = 0;
+    maxProfit = max(leftProfit[n-1], maxProfit);
     
     for(int i = 0; i < n - 1; ++i)
         maxProfit = max(maxProfit, leftProfit[i] + rightProfit[i+1]);
