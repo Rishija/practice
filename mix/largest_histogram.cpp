@@ -45,41 +45,66 @@ int largest_histogram2(vector<int> &graph) {
     if(n == 1)
         return graph[0];
     
-    int maxx = 0, i = 0;
     stack<int> bounds;
+    int maxx = 0;
     
-    while(i < n) {
-        
-        // Push larger elements
-        if(bounds.empty() || graph[bounds.top()] <= graph[i]) {
-            bounds.push(i);
-            ++i;
-            continue;
-        }
-        
-        // Single element with lowest value till index `i`
-        if(bounds.size() == 1) {
-            maxx = max(maxx, graph[bounds.top()] * i);
+    bounds.push(-1);
+    for(int i = 0; i < n; i++) {
+        int current = bounds.top();
+        while((current != - 1) && (graph[current] >= graph[i])) {
             bounds.pop();
+            maxx = max(maxx, graph[current] * (i - bounds.top() - 1));
+            current = bounds.top();
         }
-        else {
-            int temp = bounds.top();
-            bounds.pop();
-            // bounds.top() is the lower limit, `i` is the upper limit for temp
-            maxx = max(maxx, graph[temp] * (i - bounds.top() - 1));
-        }
+        bounds.push(i);
     }
     
-    while (!bounds.empty()){
-        
-        int temp = bounds.top();
+    int current = bounds.top(), right = bounds.top();
+    while(current != - 1) {
         bounds.pop();
-        
-        int tempArea = graph[temp] * (bounds.empty() ? i : i - bounds.top() - 1);
-        maxx = max(maxx, tempArea);
+        maxx = max(maxx, graph[current] * (right - bounds.top()));
+        current = bounds.top();
     }
     
     return maxx;
+    
+    /*
+     int maxx = 0, i = 0;
+     stack<int> bounds;
+     
+     while(i < n) {
+     
+         // Push larger elements
+         if(bounds.empty() || graph[bounds.top()] <= graph[i]) {
+             bounds.push(i);
+             ++i;
+             continue;
+         }
+     
+         // Single element with lowest value till index `i`
+         if(bounds.size() == 1) {
+             maxx = max(maxx, graph[bounds.top()] * i);
+             bounds.pop();
+         }
+         else {
+             int temp = bounds.top();
+             bounds.pop();
+             // bounds.top() is the lower limit, `i` is the upper limit for temp
+             maxx = max(maxx, graph[temp] * (i - bounds.top() - 1));
+         }
+     }
+     
+     while (!bounds.empty()){
+     
+         int temp = bounds.top();
+         bounds.pop();
+     
+         int tempArea = graph[temp] * (bounds.empty() ? i : i - bounds.top() - 1);
+         maxx = max(maxx, tempArea);
+     }
+     
+     return maxx;
+     */
 }
 
 int main() {
@@ -106,4 +131,3 @@ int main() {
     
     return 0;
 }
-
