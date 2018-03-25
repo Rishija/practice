@@ -9,21 +9,22 @@
 using namespace std;
 
 void helper(vector<string> &ans, string current, int open, int close) {
-    
-    if(!open && !close) {
+    if(open > close) {
+        return;
+    }
+
+    if((open==0) && (closed == 0)) {
         ans.push_back(current);
         return;
     }
     
-    if(open == close){
+    if (open > 0) {
         helper(ans, current + "(", open - 1, close);
-        return;
     }
     
-    if(close)
+    if(closed > 0) {
         helper(ans, current + ")" , open, close - 1);
-    if(open)
-        helper(ans, current + "(", open - 1, close);
+    }
 }
 
 vector<string> generateParenthesis(int n) {
