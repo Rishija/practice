@@ -1,7 +1,10 @@
 /*
  Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses
  */
-
+/*
+ Time : exponential
+ Space : O(n)
+ */
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,7 +13,7 @@ using namespace std;
 
 void helper(vector<string> &ans, string current, int open, int close) {
     
-    if(!open && !close) {
+    if(open < 1 && close < 1) {
         ans.push_back(current);
         return;
     }
@@ -24,6 +27,24 @@ void helper(vector<string> &ans, string current, int open, int close) {
         helper(ans, current + ")" , open, close - 1);
     if(open)
         helper(ans, current + "(", open - 1, close);
+    
+    /*
+     if(open > close) {
+     return;
+     }
+     
+     if((open==0) && (close == 0)) {
+     ans.push_back(current);
+     return;
+     }
+     
+     if (open > 0) {
+     helper(ans, current + "(", open - 1, close);
+     }
+     
+     if(close > 0) {
+     helper(ans, current + ")" , open, close - 1);
+     */
 }
 
 vector<string> generateParenthesis(int n) {

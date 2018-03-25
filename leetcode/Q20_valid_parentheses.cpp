@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <stack>
+#include <map>
 using namespace std;
 
 bool isValid(string s) {
@@ -19,11 +20,22 @@ bool isValid(string s) {
     if(n % 2)
         return false;
     
+    map<char,char> map;
+    map[')'] = '(';
+    map['}'] = '{';
+    map[']'] = '[';
+    
     stack<char>stack;
     for(int i = 0; i < n; ++i) {
         if(s[i] == '(' || s[i] == '{' || s[i] == '[')
             stack.push(s[i]);
         else {
+            
+            if(stack.size() == 0 || map[s[i]] != stack.top())
+                return false;
+            stack.pop();
+            
+            /*
             if(stack.size() &&
                ((s[i] == ')' && stack.top() == '(') ||
                 (s[i] == '}' && stack.top() == '{') ||
@@ -32,6 +44,7 @@ bool isValid(string s) {
                 stack.pop();
             else
                 return false;
+             */
         }
     }
     return stack.empty();
