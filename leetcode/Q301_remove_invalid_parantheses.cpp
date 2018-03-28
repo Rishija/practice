@@ -13,66 +13,65 @@ using namespace std;
 
 bool isValid(string s) {
     
-    int n = s.size();
-    if(!n)
-        return 1;
+    if(s.size() < 1)
+        return true;
     
-    stack<char> stack;
-    
+    int count = 0;
     for(char ch : s) {
-        if(ch == '(') {
-            stack.push(ch);
-        }
-        else if(ch == ')') {
-            if(stack.empty() || stack.top() != '(')
-                return 0;
-            stack.pop();
-        }
+        if(ch == '(')
+            ++ count;
+        else if(ch == ')')
+            -- count;
+        
+        if(count < 0)
+            return false;
     }
-    return stack.empty();
+    return count == 0;
 }
 /*
  Time : Exponential
  Space : O(n)
  */
+
 vector<string> removeInvalidParentheses(string s) {
     
-    int n = s.size();
-    if(!n)
+    if(s.size() == 0)
         return {""};
     
-    if(isValid(s))
-        return {s};
-    
-    string current, subString;
-    bool found = false;
     vector<string> ans;
+    queue<string> queue;
     set<string> set;
+    bool found = false;
     
-    queue<string> queue1;
-    queue1.push(s);
+    queue.push(s);
+    set.insert(s);
     
-    while(!queue1.empty() && !found) {
-        queue<string> temp;
-        while(!queue1.empty()) {
-            current = queue1.front();
-            queue1.pop();
-            for(int i = 0; i < current.size(); ++i) {
-                subString = current.substr(0, i) + current.substr(i+1, current.size());
-                if(isValid(subString)) {
-                    set.insert(subString);
-                    found = true;
-                }
-                temp.push(subString);
+    while(!queue.empty()) {
+        
+        string temp = queue.front();
+        if(isValid(temp)) {
+            ans.push_back(temp);
+            found = true;
+        }
+        queue.pop();
+        
+        if(found)
+            continue;
+        
+        for(int i = 0; i < temp.size(); i++) {
+            
+            if (!(temp[i] == '(') && !(temp[i] == ')'))
+                continue;
+            
+            // find substring
+            string substr = temp.substr(0, i) + temp.substr(i+1, temp.size());
+            
+            if(set.find(substr) == set.end()) {
+                queue.push(substr);
+                set.insert(substr);
             }
         }
-        queue1 = temp;
     }
-    if(set.size() == 0)
-        return {""};
-    
-    for(string str : set)
-        ans.push_back(str);
     return ans;
 }
 
