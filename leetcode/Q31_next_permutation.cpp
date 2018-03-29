@@ -43,7 +43,7 @@ void nextPermutation(vector<int>& nums) {
             else
                 swap(*(i-1), *(nums.end() - 1));
             
-            sort(i, nums.end());
+            reverse(i, nums.end());
             return;
         }
     }
