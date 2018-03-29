@@ -87,7 +87,6 @@ ostream& operator << (ostream &os, vi v) {
         os << x << ", ";
     cout << " ]";
     return os;
-    
 }
 
 void print(vi v) {
