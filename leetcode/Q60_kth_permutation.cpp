@@ -27,6 +27,27 @@ void factorial(int n, vector<int> &fact) {
 string getPermutation(int n, int k) {
     
     string nums;
+    for(int i = 1; i <= n; ++i)
+        nums += to_string(i);
+    
+    --k;
+    
+    vector<int> fact(n+1);
+    factorial(n, fact);
+    
+    string ans;
+    
+    for(int i = 1; i <=n; ++i) {
+        int index = k / fact[n - i];
+        ans += nums[index];
+        nums.erase(nums.begin() + index);
+        k -= index * fact[n-i];
+    }
+    return ans;
+    
+    /* Method 2
+     
+    string nums;
     nums = "*" + nums;
     for(int i = 1; i <= n; ++i)
         nums += to_string(i);
@@ -52,10 +73,9 @@ string getPermutation(int n, int k) {
         --n;
     }
     
-    /*
-     Remainder was fully divisible by fact(n)
-     Add numerbers in reverse order
-     */
+     // Remainder was fully divisible by fact(n)
+     // Add numerbers in reverse order
+     
     if(!remainder) {
         reverse(nums.begin(), nums.end());
         ans += nums;
@@ -64,6 +84,7 @@ string getPermutation(int n, int k) {
     // Delete *
     ans.erase(ans.end() - 1);
     return ans;
+    */
 }
 
 int main() {

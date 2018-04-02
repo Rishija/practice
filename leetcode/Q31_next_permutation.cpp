@@ -20,28 +20,19 @@ void swap(int &a, int &b) {
 
 void nextPermutation(vector<int>& nums) {
     
-    
     int n = nums.size();
     for(auto i = nums.end() - 1; i != nums.begin(); --i) {
         
         if(*(i-1) < *i) {
-            
-            // at pivot point, left element is  greater than last
-            if(*(i-1) >= *(nums.end() - 1)) {
                 
-                // Find element just greater than left
-                auto j = nums.end() - 1;
-                while(true) {
-                    if(*j > *(i-1))
-                        break;
-                    --j;
-                }
-                swap(*(i-1), *j);
+            // Find element just greater than left
+            auto j = nums.end() - 1;
+            while(true) {
+                if(*j > *(i-1))
+                    break;
+                --j;
             }
-            
-            // left element is the smallest
-            else
-                swap(*(i-1), *(nums.end() - 1));
+            swap(*(i-1), *j);
             
             reverse(i, nums.end());
             return;
