@@ -71,6 +71,7 @@ void helper(vector<vector<char> > &ans, vector<char> temp, int index, int n, str
     }
     
 }
+
 vector<vector<char> > palindrome_permuation(string s) {
     
     int n = s.size();

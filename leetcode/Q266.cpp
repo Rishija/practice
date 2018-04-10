@@ -22,7 +22,6 @@ bool palindrome_permutation(string s) {
 		check[x] ^= 1;
 		check[x] ? ++cnt : --cnt;
 	}
-	
 	return (cnt < 2) ? true : false;
 }
 
