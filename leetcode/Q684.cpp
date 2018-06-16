@@ -11,6 +11,38 @@ typedef vector<int> vi;
 typedef vector<vi> vvi;
 enum status {UNVISITED, VISITED, INPROCESS};
 
+/**
+ * Return once found
+
+bool helper(const vvi & graph, int current, int parent, vi &status, vi &ans, bool &done) {
+
+    status[current] = INPROCESS;
+    bool found;
+    for(auto node : graph[current]) {
+        if(done)
+            return false;
+        if(status[node] == INPROCESS && node != parent) {
+            ans.push_back(node);
+            ans.push_back(current);
+            return true;
+        }
+        if(status[node] == UNVISITED) {
+            found = helper(graph, node, current, status, ans, done);
+            if(found) {
+                ans.push_back(current);
+                if(current == *ans.begin()) {
+                    done = true;
+                    return false;
+                }
+                return true;
+            }
+        }
+    }
+    status[current] = VISITED;
+    return false;
+}
+*/
+
 bool helper(const vvi & graph, int current, int parent, vi &status, vi &ans) {
 
     status[current] = INPROCESS;
