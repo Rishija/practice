@@ -46,6 +46,40 @@ vector<int> findSubstring(string s, vector<string>& words) {
     return ans;
 }
 
+/*
+vector<int> findSubstring(string A, vector<string>& B) {
+    
+    int n = A.size(), m = B.size();
+    if(n == 0 || m == 0)    return {};
+    if(m * B[0].size() > n) return {};
+    
+    vector<int> ans;
+    int len = B[0].size(), done = m, start = 0;
+    unordered_map<string, int> req;
+    for(auto w : B) req[w]++;
+    
+    while(start <= n - m * len) {
+        int temp = start;
+        done = m;
+        unordered_map<string, int> left;
+        while(done > 0) {
+            string s = A.substr(start, len);
+            if(left[s] < req[s]) {
+                left[s]++;
+                done--;
+                start += len;
+            }
+            else    break;
+        }
+        if(done == 0)
+            ans.push_back(start - m * len);
+        start = temp + 1;
+    }
+    return ans;
+}
+
+*/
+
 /**
  * Generic case where words are not of same length
  * Time : O(N^2/(m)     where N = length of s, m = length os shortest word
