@@ -28,6 +28,47 @@ typename Btree<T>::Node* Btree<T>::lca(Node* node, T val1, T val2) {
     return node;
 }
 
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+/*
+ * Values may not be present in the tree
+ 
+ 
+TreeNode* helper(TreeNode* node, int &found, const int B, const int C) {
+    
+    if(node == nullptr) return nullptr;
+    
+    // Search in left and right subtree
+    TreeNode *foundInLeft = helper(node->left, found, B, C),
+    *foundInRight = helper(node->right, found, B, C);
+    
+    // One more element found. Increase the counter
+    if(node->val == B || node->val == C) {
+        ++found;
+        return node;
+    }
+    // If both subtrees have one of the required values
+    if(foundInLeft && foundInRight) return node;
+    // If any value is present in left subtree or right subtree
+    return foundInLeft ? foundInLeft : foundInRight;
+}
+
+int lca(TreeNode* A, int B, int C) {
+ 
+    int found = 0;
+    TreeNode* ans = helper(A, found, B, C);
+    // Both values are found in the tree
+    if(found == 2)  return ans->val;
+    // Value is present in the tree
+    if(B == C && found == 1)    return B;
+    return -1;
+}
+*/
 int main() {
     Btree<int>tree;
     tree.insert(87);
