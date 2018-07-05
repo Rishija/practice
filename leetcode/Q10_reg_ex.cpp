@@ -2,6 +2,56 @@
  Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*'.
  */
 
+typedef pair<int,int> pii;
+
+struct hashFn {
+    size_t operator () (const pii &p) const {
+        auto h1 = std::hash<int>{}(p.first);
+        auto h2 = std::hash<int>{}(p.second);
+        return h1 ^ h2;
+    }
+};
+
+using Mapp = unordered_map<pii, int, hashFn>;
+
+int helper(Mapp &dp, const string &S, const string &P, int i, int j) {
+    
+    if(dp.find({i,j}) == dp.end()) {
+        int ans;
+        if(i == S.size() && j == P.size())
+            ans = 1;
+        else if(j == P.size())
+            ans = 0;
+        else if(i == S.size()) {
+            if((P.size() - j) % 2)
+                ans = 0;
+            else
+                ans = P[j + 1] == '*' && helper(dp, S, P, i, j + 2);
+        }
+        // Next character is '*'
+        else if(j < P.size() - 1 && P[j+1] == '*') {
+            // Current current matched
+            if(P[j] == S[i] || P[j] == '.')
+                ans = helper(dp, S, P, i + 1, j) || helper(dp, S, P, i, j + 2);
+            else
+                ans = helper(dp, S, P, i, j + 2);
+        }
+        else if(P[j] == S[i] || P[j] == '.')
+            ans = helper(dp, S, P, i + 1, j + 1);
+        else
+            ans = 0;
+        dp[{i,j}] = ans;
+    }
+    return dp[{i,j}];
+}
+
+bool isMatch(string A, string B) {
+    int n = A.size(), m = B.size();
+    Mapp dp;
+    return helper(dp, A, B, 0, 0);
+}
+
+/* Without DP
 bool isMatch(string s, string p) {
     
     int n = s.size(), m = p.size();
@@ -33,6 +83,7 @@ bool isMatch(string s, string p) {
     else
         return false;
 }
+ */
 
 int main() {
     //     1
