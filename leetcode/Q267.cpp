@@ -133,3 +133,40 @@ int main() {
     return 0;
 }
 
+// ----------------------------------------------------------------------------
+
+void helper(unordered_map<char, int> &map, const int index, string &str, const char &odd, vector<string> &ans) {
+    if(index == str.size()/2) {
+        if(odd) str[index] = odd;
+        ans.push_back(str);
+        return;
+    }
+    for(auto &p : map) {
+        if(p.second >= 2) {
+            p.second -= 2;
+            str[index] = p.first;   str[str.size() - index - 1] = p.first;
+            helper(map, index + 1, str, odd, ans);
+            p.second += 2;
+        }
+    }
+}
+
+vector<string> generatePalindromes(string s) {
+    int n = s.size();
+    if(n == 0)  return {};
+    
+    unordered_map<char, int> map;
+    for(char x : s) map[x]++;
+    
+    char odd = NULL;
+    for(auto p : map) {
+        if(p.second % 2) {
+            if(odd)   return {};
+            odd = p.first;
+        }
+    }
+    string str(n, '\0');
+    vector<string> ans;
+    helper(map, 0, str, odd, ans);
+    return ans;
+}
