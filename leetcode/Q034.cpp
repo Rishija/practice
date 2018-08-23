@@ -9,13 +9,12 @@
 #include <vector>
 using namespace std;
 
+
 int bsearch(int elem, vector<int> arr, int start, int end) {
     
     int low = start, high = end, mid;
     while(low <= high) {
-        
         mid = low + (high - low) / 2;
-        
         if(arr[mid] == elem)
             return mid;
         if(arr[mid] < elem)
@@ -42,7 +41,7 @@ int helperRight(vector<int> &nums, int start, int end, int target) {
     return helperRight(nums, occurence + 1, end, target);
 }
 
-vector<int> searchRange(vector<int>& nums, int target) {
+vector<int> searchRange1(vector<int>& nums, int target) {
     
     int n = nums.size(), occurence = bsearch(target, nums, 0, n-1);
     if(occurence == -1)
@@ -55,8 +54,44 @@ vector<int> searchRange(vector<int>& nums, int target) {
     return ans;
 }
 
+// --------------------------------------------------------------------------
+
+vector<int> searchRange2(vector<int>& A, int target) {
+    int n = A.size();
+    if(n == 0)  return {-1,-1};
+    
+    int low = 0, high = n-1, mid;
+    while(low <= high) {
+        mid = low + (high - low) / 2;
+        if(A[mid] == target)     break;
+        else if(A[mid] < target) low = mid + 1;
+        else                     high = mid - 1;
+    }
+    vector<int> ans = {-1,-1};
+    if(low > high)  return ans;
+    
+    // Search left
+    low = 0; high = mid;
+    while(low <= high) {
+        mid = low + (high - low) / 2;
+        if(A[mid] < target) low = mid + 1;
+        else                high = mid - 1;
+    }
+    ans[0] = low;
+    
+    // Search right
+    low = high; high = n-1;
+    while(low <= high) {
+        mid = low + (high - low) / 2;
+        if(A[mid] > target) high = mid - 1;
+        else                low = mid + 1;
+    }
+    ans[1] = low - 1;
+    return ans;
+}
+
 void print(vector<int> vec, int target) {
-    vector<int>ans = searchRange(vec, target);
+    vector<int>ans = searchRange2(vec, target);
     cout << ans[0] << ", " << ans[1] << endl;
 }
 
