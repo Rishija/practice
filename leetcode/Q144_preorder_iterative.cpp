@@ -10,8 +10,6 @@ struct TreeNode {
 };
 
 vector<int> preorderTraversal(TreeNode* root) {
-    
-    
     vector<int> ans;
     if(root == nullptr)
         return ans;
