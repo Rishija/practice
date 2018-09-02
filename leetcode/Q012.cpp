@@ -57,7 +57,7 @@ public:
         if(num < 100)  return "XC" + helper(num % 10);
         
         if(num < 400)  return string(num / 100, 'C') + helper(num % 100);
-        if(num < 500) return "CD" + helper(num % 100);
+        if(num < 500)  return "CD" + helper(num % 100);
         
         if(num < 900)  return "D" + helper(num - 500);
         if(num < 1000) return "CM" + helper(num % 100);
