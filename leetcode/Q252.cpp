@@ -5,20 +5,61 @@ Example 1:
 
 Input: [[0,30],[5,10],[15,20]]
 Output: false
+
 Example 2:
 
 Input: [[7,10],[2,4]]
 Output: true
 */
 
-bool canAttendMeetings(vector<Interval>& intervals) {
-    if(intervals.size() < 2)    return true;
-    sort(intervals.begin(), intervals.end(), [] (const Interval &a, const Interval &b) {
-        return a.start < b.start;
+// Method 1
+typedef vector<vector<int>> vvi;
+typedef vector<int> vi;
+
+bool canAttendMeetings(vector<vector<int>>& A) {
+    if(A.size() < 2)
+        return true;
+
+    // Sort by increasing starting time
+    sort(A.begin(), A.end(), [] (const vi &a, const vi &b) {
+        return a[0] < b[0];
     });
-    for(int i = intervals.size() - 1; i > 0; --i) {
-        if(intervals[i].start < intervals[i-1].end)
+
+    for(int i = 0; i < A.size() - 1; ++i)
+        if(A[i][1] > A[i + 1][0])
             return false;
+    return true;
+}
+
+// Method 2
+typedef pair<int, bool> Pair;
+
+bool canAttendMeetings(vector<vector<int>>& A) {
+    vector<Pair> v;
+
+    // Single collection of entry and exit
+    for(const vector<int> &interval : A) {
+        v.push_back({interval[0], true});
+        v.push_back({interval[1], false});
+    }
+
+    // Sort by increasing starting time, if same time, put exit first
+    sort(v.begin(), v.end(), [] (const Pair &a, const Pair &b) {
+        if(a.first == b.first)
+            return a.second == false;
+        return a.first < b.first;
+    });
+
+    // Initially there is no meeting going on
+    bool flag = false;
+    for(const Pair &p : v) {
+        // There is a new meeting entry point
+        if(p.second) {
+            // There is already a meeting going on
+            if(flag)
+                return false;
+        }
+        flag = p.second;
     }
     return true;
 }
