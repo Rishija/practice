@@ -54,3 +54,45 @@ vector<int> findOrder(int numCourses, vector<pair<int, int>>& prerequisites) {
     }
     return order;
 }
+
+
+// Method 2
+
+vector<int> findOrder(int n, vector<vector<int>>& A) {
+    if(n < 0)
+        return {};
+    if(n == 1)
+        return {0};
+    
+    unordered_map<int, unordered_set<int>> outgoing;
+    unordered_map<int, int> incoming;
+    vector<int> ans;
+    
+    for(vector<int> &v : A) {
+        outgoing[v[1]].insert(v[0]);
+        ++incoming[v[0]];
+    }
+    
+    vector<int> nodesWithDegreeZero;
+    for(int i = 0; i < n; ++i)
+        if(incoming[i] == 0)
+            nodesWithDegreeZero.push_back(i);
+    
+    while(true) {
+        if(nodesWithDegreeZero.empty())
+            break;
+        int node = nodesWithDegreeZero[nodesWithDegreeZero.size() - 1];
+        nodesWithDegreeZero.pop_back();
+        ans.push_back(node);
+        
+        for(int neighbour : outgoing[node]) {
+            --incoming[neighbour];
+            if(incoming[neighbour] == 0)
+                nodesWithDegreeZero.push_back(neighbour);
+        }
+    }
+    
+    if(ans.size() < n)
+        return {};
+    return ans;
+}
