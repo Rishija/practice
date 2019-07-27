@@ -42,3 +42,47 @@ public:
         return ans;
     }
 };
+
+
+// Method 2
+void call(vector<string> &v, string &s, int start, int end) {
+    if(start > end) {
+        v.push_back(s);
+        return;
+    }
+    
+    // Not beginning of number
+    if(start != 0) {
+        s[start] = '0';
+        s[end] = '0';
+        call(v, s, start + 1, end - 1);
+    }
+    s[start] = '1';
+    s[end] = '1';
+    call(v, s, start + 1, end - 1);
+    
+    s[start] = '8';
+    s[end] = '8';
+    call(v, s, start + 1, end - 1);
+    
+    // Not middle element
+    if(start < end) {
+        s[start] = '6';
+        s[end] = '9';
+        call(v, s, start + 1, end - 1);
+        s[start] = '9';
+        s[end] = '6';
+        call(v, s, start + 1, end - 1);
+    }
+}
+
+vector<string> findStrobogrammatic(int n) {
+    if(n == 0)
+        return {};
+    if(n == 1)
+        return {"0", "1", "8"};
+    string s(n, '\0');
+    vector<string> ans;
+    call(ans, s, 0, n-1);
+    return ans;
+}
